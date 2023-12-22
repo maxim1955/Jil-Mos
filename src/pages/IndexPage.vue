@@ -2,8 +2,9 @@
   <q-page class="flex flex-center items-center ">
     <div class="main_promo">
       <div class="container">
-        <h1 class="main_promo_title">
-          Поверка счетчиков воды <br> в Москве от <span class="text-red fz-150">650₽</span><br> <span class="fz-90">НА ДОМУ БЕЗ СНЯТИЯ</span>
+        <h1 class="main_promo_title Rubik500">
+          Поверка счетчиков воды <br> в Москве от <span class="text-red fz-150 Rubik500">650₽</span><br> <span
+            class="fz-90">НА ДОМУ БЕЗ СНЯТИЯ</span>
         </h1>
         <q-form class="flex column form_main">
           <div class="flex form_gap">
@@ -231,7 +232,7 @@
         </div>
       </div>
     </section>
-    <section class="bg-blue check_district" style="width: 100%; height: 129px;position: relative">
+    <section class="bg_blue check_district" style="width: 100%; height: 129px;position: relative">
       <div class="container">
         <div class="flex items-center justify-evenly check_district_box"
              style="position: absolute; top: 0;left: 0;bottom: 0;right: 0">
@@ -240,8 +241,11 @@
         </div>
       </div>
     </section>
-    <section class="step_check">
-      <h2 class="step_title">КАК ПРОХОДИТ ПОВЕРКА <br> <span class="text-h4">счётчиков воды в Москве</span></h2>
+    <section class="step_check ">
+      <div class="flex column items-center how_check q-py-xl">
+        <p class="step_title fz-32 text-bold">КАК ПРОХОДИТ ПОВЕРКА</p>
+        <p class="fz-26">счётчиков воды в Москве</p>
+      </div>
       <div class="step_cards flex no-wrap justify-center">
         <div class="step_items flex justify-center items-center ">
           <div class="">
@@ -498,7 +502,7 @@
         </div>
       </div>
     </section>
-    <section class="bg-blue q-mb-xl" style="width: 100%; height: 129px;position: relative">
+    <section class="bg_blue q-mb-xl" style="width: 100%; height: 129px;position: relative">
       <div class="container">
         <div class="flex items-center justify-around check_district_box"
              style="position: absolute; top: 0;left: 0;bottom: 0;right: 0">
@@ -592,8 +596,7 @@
                           Стоимость работы по поверке счетчика на дому, без
                           снятия, с помощью переносной поверочной установки.
                           *Льготная цена при предъявлении соответствующих
-                          удостоверений (социальных карт и т.д.), выдаваемых
-                          органами социальной защиты РФ
+                          удостоверений (социальных карт и т.д.), выдаваемых органами социальной защиты РФ
                         </p>
                       </div>
                       <div class="">
@@ -863,7 +866,7 @@
 
       </div>
     </section>
-    <section class="bg-blue q-mb-xl" style="width: 100%; height: 129px;position: relative">
+    <section class="bg_blue q-mb-xl" style="width: 100%; height: 129px;position: relative">
       <div class="container">
         <div class="flex items-center justify-around check_district_box"
              style="position: absolute; top: 0;left: 0;bottom: 0;right: 0">
@@ -871,7 +874,7 @@
         </div>
       </div>
     </section>
-    <section style="width: 100%;">
+    <section style="width: 100%;" class="q-mb-xl">
       <div class="container">
         <div class="cards-meter flex justify-center">
           <div class="item-meter">
@@ -911,6 +914,194 @@
         </div>
       </div>
     </section>
+    <section style="width: 100%;" class="bag-grey q-mb-xl">
+      <div class="container">
+        <div class="flex justify-around">
+          <div class="form_footer">
+
+            <div class="recall_form flex column q-mt-lg justify-center">
+              <p class="text-center text-white posit">ОСТАВЬТЕ ЗАЯВКУ</p>
+              <q-input type="text" outlined class="q-pb-md"/>
+              <q-input type="text" outlined class="q-pb-md"/>
+              <p>Даю согласие на обработку персональных
+                данных
+                <svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                      d="M8.5 17.1C13.0287 17.1 16.7 13.4288 16.7 8.90002C16.7 4.37129 13.0287 0.700012 8.5 0.700012C3.97126 0.700012 0.299988 4.37129 0.299988 8.90002C0.299988 13.4288 3.97126 17.1 8.5 17.1Z"
+                      fill="#2258DC"/>
+                  <path d="M4.5 8.70001L6.79999 11L12.8 4.59998" stroke="white" stroke-width="2"
+                        stroke-miterlimit="10"/>
+                </svg>
+              </p>
+              <q-btn class="q-pt-sm q-px-md form_send_btn">
+                ОТПРАВИТЬ
+              </q-btn>
+            </div>
+          </div>
+          <div class="image_form_footer">
+            <img src="src/assets/footer_form.png" alt="">
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="" style="width: 100%;">
+      <h2 class="fz-32 text-center text-bold q-mb-lg">Цены:</h2>
+      <div class="bg_blue">
+        <q-list class="flex column justify-center items-center">
+          <q-item class="list-item">
+            <q-item-section class="list-title__block">
+              <div class="list-title text-white fz-16">Поверка счетчика ХВС, поверка счетчика ГВС - для граждан
+                пенсионного
+                возраста
+              </div>
+            </q-item-section>
+            <q-item-section class="list-subtitle__block">
+              <div class="list-subtitle text-white fz-26">750₽</div>
+            </q-item-section>
+          </q-item>
+          <q-separator class="separator_list"/>
+          <q-item class="list-item">
+            <q-item-section class="list-title__block">
+              <div class="list-title text-white fz-16">Поверка счетчика ХВС, поверка счетчика ГВС - для граждан
+                пенсионного
+                возраста
+              </div>
+            </q-item-section>
+            <q-item-section class="list-subtitle__block">
+              <div class="list-subtitle text-white fz-26">750₽</div>
+            </q-item-section>
+          </q-item>
+          <q-separator class="separator_list"/>
+          <q-item class="list-item">
+            <q-item-section class="list-title__block">
+              <div class="list-title text-white fz-16">Поверка счетчика ХВС, поверка счетчика ГВС - для граждан
+                пенсионного
+                возраста
+              </div>
+            </q-item-section>
+            <q-item-section class="list-subtitle__block">
+              <div class="list-subtitle text-white fz-26">750₽</div>
+            </q-item-section>
+          </q-item>
+        </q-list>
+
+
+        <div class="flex justify-center">
+          <q-btn class="text-center text-white fz-26" style="margin: 0 auto;" dense unelevated
+                 @click="listOpen ? listOpen = false : listOpen = true"
+          >
+            Подробнее
+          </q-btn>
+        </div>
+
+        <div class="" v-if="listOpen === true">
+          <q-list class="flex column justify-center items-center " v-for="gen of listService[0].general">
+            <q-item class="list-item">
+              <q-item-section class="list-title__block">
+                <div class="list-title text-white fz-16">{{ gen.name }}
+                </div>
+              </q-item-section>
+              <q-item-section class="list-subtitle__block">
+                <div class="list-subtitle text-white fz-26">{{ gen.price }}</div>
+              </q-item-section>
+            </q-item>
+            <q-separator class="separator_list"/>
+          </q-list>
+
+          <p class="text-white text-center fz-26 q-my-lg text-bold">САНТЕХНИЧЕСКИЕ РАБОТЫ</p>
+          <p class="text-white text-center fz-26 q-my-xl text-bold">СМЕСИТЕЛИ</p>
+          <q-list class="flex column justify-center items-center" v-for="faus of listService[0].plumbing[0].faucets">
+            <q-item class="list-item">
+              <q-item-section class="list-title__block">
+                <div class="list-title text-white fz-16">{{ faus.name }}</div>
+              </q-item-section>
+              <q-item-section class="list-subtitle__block">
+                <div class="list-subtitle text-white fz-26">{{ faus.price }}</div>
+              </q-item-section>
+            </q-item>
+            <q-separator class="separator_list"/>
+          </q-list>
+
+          <p class="text-white text-center fz-26 q-my-xl text-bold">РАКОВИНЫ</p>
+
+          <q-list class="flex column justify-center items-center" v-for="shell of listService[0].plumbing[0].shells">
+            <q-item class="list-item">
+              <q-item-section class="list-title__block">
+                <div class="list-title text-white fz-16">{{ shell.name }}</div>
+              </q-item-section>
+              <q-item-section class="list-subtitle__block">
+                <div class="list-subtitle text-white fz-26">{{ shell.price }}</div>
+              </q-item-section>
+            </q-item>
+            <q-separator class="separator_list"/>
+          </q-list>
+
+          <p class="text-white text-center fz-26 q-my-xl text-bold">Унитазы</p>
+
+          <q-list class="flex column justify-center items-center" v-for="toul of listService[0].plumbing[0].toilet">
+            <q-item class="list-item">
+              <q-item-section class="list-title__block">
+                <div class="list-title text-white fz-16">{{ toul.name }}</div>
+              </q-item-section>
+              <q-item-section class="list-subtitle__block">
+                <div class="list-subtitle text-white fz-26">{{ toul.price }}</div>
+              </q-item-section>
+            </q-item>
+            <q-separator class="separator_list"/>
+          </q-list>
+
+          <p class="text-white text-center fz-26 q-my-xl text-bold">Прочие сантехнические работы</p>
+
+          <q-list class="flex column justify-center items-center" v-for="other of listService[0].others">
+            <q-item class="list-item">
+              <q-item-section class="list-title__block">
+                <div class="list-title text-white fz-16">{{ other.name }}</div>
+              </q-item-section>
+              <q-item-section class="list-subtitle__block">
+                <div class="list-subtitle text-white fz-26">{{ other.price }}</div>
+              </q-item-section>
+            </q-item>
+            <q-separator class="separator_list"/>
+          </q-list>
+          <div class="flex justify-center q-py-lg">
+            <q-btn class="text-white bg-red list-sendCall">ЗАКАЗАТЬ УСЛУГУ</q-btn>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section style="width: 100%" class="map_district">
+      <div class="container">
+        <div class="flex column justify-center absolute-center">
+          <div class="bg-white q-mb-md" style="max-width: 450px; border-radius: 20px; padding: 5px 5rem;">
+            <p class="fz-26 text-bold text-center">Ваш район</p>
+            <p class="text-blue-5 fz-16 text-bold">125 районов и 10 округов</p>
+          </div>
+          <q-btn class="text-white bg-red map-sendCall">ЗАКАЗАТЬ УСЛУГУ</q-btn>
+        </div>
+      </div>
+    </section>
+    <footer class="footer  q-pt-xl bg_blue" style="width: 100%;">
+      <div class="container">
+        <div class="flex justify-around text-white">
+          <div class="img_footer">
+            <img src="src/assets/logo-header.svg" alt="logo_footer">
+          </div>
+          <div class="footer_mid">
+            <p><a href="#">Политика конфиденциальности</a></p>
+            <p><a href="#">Пользовательское соглашение</a></p>
+          </div>
+          <div class="footer_links flex column items-end">
+            <p>2023, «ЖИЛИЩНИК»</p>
+            <p>8(800) 555-22-39</p>
+            <p>Москва, ул. Тихомирова, д. 17 к 1, пом. 14/1</p>
+            <p>Служба контроля качества help@jil-mos.ru</p>
+          </div>
+        </div>
+        <div class="q-pb-xl">
+          <p class="text-center text-white">Поверка счетчиков воды в Москве без снятия. Все права защищены</p>
+        </div>
+      </div>
+    </footer>
   </q-page>
 </template>
 
@@ -918,7 +1109,73 @@
 import {ref} from "vue";
 
 const tab = ref('one')
+const listOpen = ref(false)
+const listService = ref([
+  {
+    general: [
+      {name: 'Услуга', price: 'Стоимость'},
+      {name: 'Акт ввода в эксплуатацию и опломбировка одного узла', price: '2500 ₽'},
+      {name: 'Замена счетчика VALTEC', price: '2700₽ '},
+      {name: 'Замена прокладок', price: '1000₽ '},
+      {name: 'Замена опорной арматуры', price: '2000₽'},
+      {name: '', price: ''},
+      {name: '', price: ''},
+      {name: '', price: ''},
+      {name: '', price: ''},
+      {name: '', price: ''},
+      {name: '', price: ''},
+      {name: '', price: ''},
+      {name: '', price: ''},
+      {name: '', price: ''},
+    ],
+    plumbing: [
+      {
+        faucets: [
+          {name: 'Услуга', price: 'Стоимость от'},
+          {name: 'Монтаж смесителя', price: '1500₽'},
+          {name: '', price: ''},
+          {name: '', price: ''},
+          {name: '', price: ''},
+          {name: '', price: ''},
+          {name: '', price: ''},
+        ],
+        shells: [
+          {name: 'Услуга', price: 'Стоимость от'},
+          {name: 'Монтаж раковины', price: '2000₽'},
+          {name: '', price: ''},
+          {name: '', price: ''},
+          {name: '', price: ''},
+          {name: '', price: ''},
+          {name: '', price: ''},
+        ],
+        toilet: [
+          {name: 'Услуга', price: 'Стоимость от'},
+          {name: 'Монтаж унитаза', price: '2000'},
+          {name: '', price: ''},
+          {name: '', price: ''},
+          {name: '', price: ''},
+          {name: '', price: ''},
+          {name: '', price: ''},
+        ]
+      }
+    ],
+    others: [
+      {name: 'Услуга', price: 'Стоимость от'},
+      {name: 'Монтаж фильтров', price: '1500 ₽'},
+      {name: 'Монтаж и подключение редукторов', price: '1500 ₽'},
+      {name: '', price: ''},
+      {name: '', price: ''},
+      {name: '', price: ''},
+      {name: '', price: ''},
+      {name: '', price: ''},
+      {name: '', price: ''},
+      {name: '', price: ''},
+      {name: '', price: ''},
+      {name: '', price: ''},
+    ]
+  }
 
+])
 </script>
 
 <style>
@@ -951,6 +1208,18 @@ const tab = ref('one')
 
 .fz-26 {
   font-size: 26px;
+}
+
+.fz-16 {
+  font-size: 16px;
+}
+
+.Rubik400 {
+  font-family: "Rubik-regular";
+}
+
+.Rubik500 {
+  font-family: Rubik-Medium;
 }
 
 .main_promo {
@@ -1083,6 +1352,12 @@ const tab = ref('one')
 }
 
 /* check_district */
+.how_check {
+  max-width: fit-content;
+  margin: 0 auto;
+  align-items: start;
+}
+
 .text-check_district {
   color: #FFF;
 
@@ -1108,7 +1383,6 @@ const tab = ref('one')
 /* Step */
 .step_title {
   margin: 0 auto;
-  width: 54%;
   padding-bottom: 20px;
 }
 
@@ -1117,7 +1391,7 @@ const tab = ref('one')
 }
 
 .step_cards {
-  background: rgba(128, 128, 128, 0.26);
+  background: linear-gradient(270deg, rgba(242, 242, 242, 0.00) 0%, #F2F2F2 16.84%, #F2F2F2 84.59%, rgba(242, 242, 242, 0.00) 100%);
   max-width: 100vw;
   width: 100%;
 }
@@ -1134,6 +1408,7 @@ const tab = ref('one')
 }
 
 /*recall_form*/
+
 .recall_form {
   border-radius: 10px;
   max-width: 480px;
@@ -1191,7 +1466,6 @@ const tab = ref('one')
   padding: 15px;
   width: 100%;
   gap: 10px;
-
 }
 
 .review-item {
@@ -1211,6 +1485,8 @@ const tab = ref('one')
 /*Tab*/
 .tab-text__subtitle {
   font-size: 16px;
+
+
   max-width: 430px;
 }
 
@@ -1240,5 +1516,57 @@ const tab = ref('one')
   gap: 10px;
   background: #169AC4;
   border-radius: 20px;
+}
+
+/*list items*/
+.list-item {
+  width: 100%;
+  max-width: 940px;
+}
+
+.list-title__block {
+  flex-grow: 6;
+}
+
+.list-subtitle__block {
+  flex-grow: 1;
+}
+
+
+.list-title {
+  color: rgba(255, 255, 255, .7);
+}
+
+
+.list-subtitle {
+  text-align: end;
+  color: rgba(255, 255, 255, .7);
+}
+
+.separator_list {
+  background: white;
+  height: 2px;
+  width: 100%;
+  max-width: 950px;
+}
+
+.map_district {
+  background: url("src/assets/Новая папка/map_bg.jpg") no-repeat center;
+  background-size: cover;
+  position: relative;
+  height: 50vh;
+  opacity: 0.5;
+  z-index: 1;
+}
+
+.map-sendCall {
+  border-radius: 20px;
+  border: none;
+  z-index: 4;
+}
+
+/*footer */
+.bg_blue {
+  background: #14ABD6;
 }
 </style>
