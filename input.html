@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form>
+    <label>Для</label>
+    <input type="text" class="input">
+    <input class="result" name="result"/>
+    <button onclick="">очистить</button>
+</form>
+<script>
+    let input = document.querySelector('.input')
+    input.addEventListener('input', () => {
+        let result = document.querySelector('.result')
+        result.value = input.value
+
+    })
+
+
+</script>
+</body>
+</html>

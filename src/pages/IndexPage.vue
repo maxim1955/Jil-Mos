@@ -1,33 +1,44 @@
 <template xmlns="http://www.w3.org/1999/html">
   <q-page class="flex flex-center items-center ">
+    <v-modal-form :persitstent="openFormModal" @close-modal="openFormModal=false"/>
+    <v-policy :check-toggle="modalPolicy" @close_policy="modalPolicy = false"/>
+    <terms-of-use :check-toggle="modalTerms"/>
     <div class="main_promo">
       <div class="container">
         <h1 class="main_promo_title Rubik500">
-          Поверка счетчиков воды <br> в Москве от <span class="text-red fz-150 Rubik500">650₽</span><br> <span
-            class="fz-90">НА ДОМУ БЕЗ СНЯТИЯ</span>
+          Поверка счетчиков воды <br> в Москве от <span class="text-red Rubik500 fz-650">650₽</span><br> <span
+            class="fz-home">НА ДОМУ БЕЗ СНЯТИЯ</span>
         </h1>
         <q-form class="flex column form_main">
           <div class="flex form_gap">
             <q-input
+                v-model="nameInput"
                 type="text"
+                class="input_form fz-32"
+                label-color="white"
                 label="Ваше имя*"
-                class="input_form"
+                color="white"
             />
             <q-input
+                v-model="phoneInput"
                 type="text"
                 label="Телефон *"
+                label-color="white"
                 class="input_form"
+                color="white"
+                mask="+7(###)###-##-##"
             />
             <button
                 type="submit"
                 rounded
                 class="btn_submit bg-red"
+                @click="sendFormToCall"
             >
               ЗАКАЗАТЬ ПОВЕРКУ
             </button>
           </div>
-          <div class=""></div>
-          <p class="text-white pol_conf">Отправляя форму, я даю свое согласие на обработку <span class="text-blue">персональных данных</span>
+          <p class="text-white pol_conf">Отправляя форму, я даю свое согласие на обработку <a href="#">персональных
+            данных</a>
           </p>
         </q-form>
       </div>
@@ -131,7 +142,7 @@
                     fill="#E4974E"/>
               </svg>
             </div>
-            <div class="item_text">
+            <div class="item_text ">
               Фиксированная цена на поверку счетчиков
               Скидки для пенсионеров и инвалидов
             </div>
@@ -139,54 +150,56 @@
         </div>
       </div>
     </section>
-    <section class="q-py-xl ">
+    <section class="q-py-xl q-px-md ">
       <div class="container">
         <div class="plus_company flex justify-center ">
           <div class="list_plus flex column no-wrap">
             <div class="item_plus ">
-              <div class="flex">
+              <div class="flex items-center">
                 <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1.40002 5.70007V15.6001L10.2 20.6001L19 15.6001V5.70007L10.2 0.700073L1.40002 5.70007Z"
                         stroke="#5D99B6" stroke-miterlimit="10"/>
                 </svg>
-                <p class="q-pl-lg">
+                <div class="q-pl-lg  Rubik400 item_plus__text fz-26">
                   Комфорт
-                </p>
+                </div>
               </div>
-              <p>Наша компания работает для вас ежедневно, без выходных и праздников.
+              <p class="q-pt-sm items_plus__subtitle Rubik400 fz-16">Наша компания работает для вас ежедневно, без
+                выходных и праздников.
                 Мы всегда ответим на звонок и подберём удобное для вас время</p>
             </div>
             <div class="item_plus ">
-              <div class="flex">
+              <div class="flex items items-center">
                 <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1.40002 5.70007V15.6001L10.2 20.6001L19 15.6001V5.70007L10.2 0.700073L1.40002 5.70007Z"
                         stroke="#5D99B6" stroke-miterlimit="10"/>
                 </svg>
-                <p class="q-pl-lg">
+                <div class="q-pl-lg Rubik400 item_plus__text fz-26">
                   Качество
-                </p>
+                </div>
               </div>
-              <p>Мы всегда проследим за качеством выполнения работ на всех этапах</p>
+              <p class="q-pt-sm items_plus__subtitle Rubik400 fz-16">Мы всегда проследим за качеством выполнения работ
+                на всех этапах</p>
             </div>
             <div class="item_plus">
-              <div class="flex">
+              <div class="flex items-center">
                 <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1.40002 5.70007V15.6001L10.2 20.6001L19 15.6001V5.70007L10.2 0.700073L1.40002 5.70007Z"
                         stroke="#5D99B6"
                         stroke-miterlimit="10"/>
                 </svg>
-                <p class="q-pl-lg">
+                <div class="q-pl-lg Rubik400 item_plus__text fz-26">
                   Доверие
-                </p>
+                </div>
               </div>
-              <p>
+              <p class="q-pt-sm items_plus__subtitle Rubik400 fz-16">
                 Жилищник - лидер рейтингов по поверке счетчиков воды в Москве
               </p>
             </div>
           </div>
-          <div class="company_info justify-center flex bg-grey-3 q-pt-lg">
+          <div class="company_info justify-center flex bg-grey-3 q-pt-lg q-px-md">
             <div class="info_arshin flex">
-              <div class="">
+              <div class="flex items-center">
                 <svg width="72" height="40" viewBox="0 0 72 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M5.79999 8.20007H0.200012V39.6001H5.79999V8.20007Z" fill="black"/>
                   <path d="M71.7 8.20007H66.1V39.6001H71.7V8.20007Z" fill="black"/>
@@ -200,11 +213,11 @@
                 </svg>
               </div>
               <div class="info_arshin_text ">
-                <p>РОССТАНДАРТ Федеральное агенство по техническому регулированию и
+                <p class="Rubik400 text-grey-6">РОССТАНДАРТ Федеральное агенство по техническому регулированию и
                   метрологии Информацию о внесении результатов</p>
-                <p>Информацию о внесении результатов проведения поверки можно посмотреть
+                <p class="Rubik400 text-black">Информацию о внесении результатов проведения поверки можно посмотреть
                   в базе «АРШИН»</p>
-                <a href="#" class="link_to_site">Перейти на сайт </a>
+                <a href="#" class="link_to_site Rubik400 fz-16">Перейти на сайт </a>
               </div>
             </div>
             <div class="info_servicePos q-pt-lg">
@@ -223,8 +236,12 @@
                   </svg>
                 </div>
                 <div class="">
-                  <p class="">Информацию о наших партнеров можно посмотреть на сайте Росаккредитации </p>
-                  <p>«Городская метрологическая служба» Проверить «СЕРВИСПОС» Проверить</p>
+                  <p class=" fz-16 Rubik400" style="max-width: 500px">Информацию о наших партнеров можно посмотреть на
+                    сайте Росаккредитации </p>
+                  <p class=" fz-16 Rubik400" style="max-width: 500px">«Городская метрологическая служба»
+                    <a href="https://pub.fsa.gov.ru/ral/view/35749/applicant">Проверить</a>
+                    «СЕРВИСПОС» <a href="https://pub.fsa.gov.ru/ral/view/35773/applicant">Проверить</a>
+                  </p>
                 </div>
               </div>
             </div>
@@ -236,15 +253,18 @@
       <div class="container">
         <div class="flex items-center justify-evenly check_district_box"
              style="position: absolute; top: 0;left: 0;bottom: 0;right: 0">
-          <p class="text-white text-check_district">ВАЖНО! Поверяем счётчики воды во всех районах Москвы</p>
-          <button class="bg-red text-white btn_district text-check_district">ЗАКАЗАТЬ УСЛУГУ</button>
+          <p class="text-white text-check_district Rubik500 fz-21">ВАЖНО! Поверяем счётчики воды во всех районах
+            Москвы
+          </p>
+          <button class="bg-red text-white btn_district Rubik500 fz-16" @click="openFormModal = true">ЗАКАЗАТЬ УСЛУГУ
+          </button>
         </div>
       </div>
     </section>
-    <section class="step_check ">
+    <section class="step_check" id="step_check">
       <div class="flex column items-center how_check q-py-xl">
-        <p class="step_title fz-32 text-bold">КАК ПРОХОДИТ ПОВЕРКА</p>
-        <p class="fz-26">счётчиков воды в Москве</p>
+        <p class="step_title fz-32 text-bold Rubik500">КАК ПРОХОДИТ ПОВЕРКА</p>
+        <p class="fz-26 Rubik400">счётчиков воды в Москве</p>
       </div>
       <div class="step_cards flex no-wrap justify-center">
         <div class="step_items flex justify-center items-center ">
@@ -272,8 +292,9 @@
             </svg>
           </div>
           <div class="text-center">
-            <p>Заявка</p>
-            <p class="text-center step_text">Вы звоните к нам в контакт центр или оставляете заявку на сайте</p>
+            <p class="fz-26 Rubik400">Заявка</p>
+            <p class="text-center step_text Rubik400 fz-16 text-grey-6">Вы звоните к нам в контакт центр или оставляете
+              заявку на сайте</p>
           </div>
         </div>
         <div class="step_items flex justify-center items-center">
@@ -294,8 +315,9 @@
             </svg>
           </div>
           <div class="text-center">
-            <p>Поверка</p>
-            <p class="text-center step_text">Производим с помощью переносной поверочной установки поверку счетчика, без
+            <p class="fz-26 Rubik400">Поверка</p>
+            <p class="text-center step_text Rubik400 fz-16 text-grey-6">Производим с помощью переносной поверочной
+              установки поверку счетчика, без
               его
               снятия</p>
           </div>
@@ -325,8 +347,8 @@
 
           </div>
           <div class="text-center">
-            <p>Документы</p>
-            <p class="text-center step_text">По результатам прохождения
+            <p class="fz-26 Rubik400">Документы</p>
+            <p class="text-center step_text Rubik400 fz-16 text-grey-6">По результатам прохождения
               поверки выдаем документы для
               МФЦ и управляющей компании</p>
           </div>
@@ -351,41 +373,26 @@
 
           </div>
           <div class="text-center">
-            <p>Аршин</p>
-            <p class="text-center step_text">Регистрируем сведения о
+            <p class="fz-26 Rubik400">Аршин</p>
+            <p class="text-center step_text Rubik400 fz-16 text-grey-6">Регистрируем сведения о
               поверке в электронной базе
               ФГИС «АРШИН»</p>
           </div>
         </div>
       </div>
     </section>
-    <section class="metr_form ">
+    <section class="metr_form">
       <div class="container flex justify-around">
-        <div class="recall_form flex column q-mt-lg justify-center">
-          <p class="text-center text-white posit">ОСТАВЬТЕ ЗАЯВКУ</p>
-          <q-input type="text" outlined class="q-pb-md"/>
-          <q-input type="text" outlined class="q-pb-md"/>
-          <p>Даю согласие на обработку персональных
-            данных
-            <svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                  d="M8.5 17.1C13.0287 17.1 16.7 13.4288 16.7 8.90002C16.7 4.37129 13.0287 0.700012 8.5 0.700012C3.97126 0.700012 0.299988 4.37129 0.299988 8.90002C0.299988 13.4288 3.97126 17.1 8.5 17.1Z"
-                  fill="#2258DC"/>
-              <path d="M4.5 8.70001L6.79999 11L12.8 4.59998" stroke="white" stroke-width="2" stroke-miterlimit="10"/>
-            </svg>
-          </p>
-          <q-btn class="q-pt-sm q-px-md form_send_btn">
-            ОТПРАВИТЬ
-          </q-btn>
-        </div>
+        <v-open-form/>
         <div class="q-pt-md">
-          <img src="src/assets/metr.png" alt="metr" srcset=""/>
+          <img src="src/assets/metr.png" alt="metr" srcset="" class="dpNone"/>
         </div>
       </div>
     </section>
-    <section class="bag-grey flex justify-center q-py-xl">
-      <div class="">
-        <p class="">ЕЖЕДНЕВНО МЫ ОБРАБАТЫВАЕМ <span class="text-red-5">БОЛЕЕ 900 ЗАЯВОК</span> И НАШИ КЛИЕНТЫ ПОЛУЧАЮТ:
+    <section class="bag-grey flex justify-center q-py-xl q-pl-md">
+      <div class="flex">
+        <p class="Rubik500 fz-32" style="max-width: 856px">ЕЖЕДНЕВНО МЫ ОБРАБАТЫВАЕМ <span class="text-red-5">БОЛЕЕ 900 ЗАЯВОК</span>
+          И НАШИ КЛИЕНТЫ ПОЛУЧАЮТ:
         </p>
       </div>
       <div class="">
@@ -416,8 +423,8 @@
               </svg>
             </div>
             <div class="text_company">
-              <h3 class="text-company-h3">Нам можно доверять</h3>
-              <p class="text-company-subtitle">Поверку в официальной
+              <h3 class="text-company-h3 Rubik500 ">Нам можно доверять</h3>
+              <p class="text-company-subtitle  fz-16 Rubik500 text-grey-6">Поверку в официальной
                 аккредитованной метрологической
                 службе</p>
             </div>
@@ -443,8 +450,8 @@
               </svg>
             </div>
             <div class="text_company">
-              <h3 class="text-company-h3">Мы экономим ваш бюджет</h3>
-              <p class="text-company-subtitle">Качественную работу за адекватные
+              <h3 class="text-company-h3 Rubik500">Мы экономим ваш бюджет</h3>
+              <p class="text-company-subtitle fz-16 Rubik500 text-grey-6">Качественную работу за адекватные
                 деньги</p>
             </div>
           </div>
@@ -469,8 +476,8 @@
               </svg>
             </div>
             <div class="text_company">
-              <h3 class="text-company-h3">Мы заботимся о вас</h3>
-              <p class="text-company-subtitle">Соблюдение всех санитарно-
+              <h3 class="text-company-h3 Rubik500 ">Мы заботимся о вас</h3>
+              <p class="text-company-subtitle  fz-16 Rubik500 text-grey-6">Соблюдение всех санитарно-
                 эпидемиологических требований</p>
             </div>
           </div>
@@ -495,8 +502,8 @@
               </svg>
             </div>
             <div class="text_company">
-              <h3 class="text-company-h3">Мы ценим ваше время</h3>
-              <p class="text-company-subtitle">Выполнение заказа в удобное для вас время</p>
+              <h3 class="text-company-h3 Rubik500 ">Мы ценим ваше время</h3>
+              <p class="text-company-subtitle fz-16 Rubik500 text-grey-6">Выполнение заказа в удобное для вас время</p>
             </div>
           </div>
         </div>
@@ -506,73 +513,22 @@
       <div class="container">
         <div class="flex items-center justify-around check_district_box"
              style="position: absolute; top: 0;left: 0;bottom: 0;right: 0">
-          <p class="text-center text-white fz-32">ЧТО ГОВОРЯТ НАШИ КЛИЕНТЫ?</p>
+          <p class="text-center text-white fz-32 Rubik500" id="about" ref="about">ЧТО ГОВОРЯТ НАШИ КЛИЕНТЫ?</p>
         </div>
       </div>
     </section>
     <section class="reviews-section">
-      <div class="container">
-        <div class="reviews-block flex justify-between">
-          <div class="review-item">
-            <div class="reviews-image">
-              <svg xmlns="http://www.w3.org/2000/svg" width="77" height="77" viewBox="0 0 77 77" fill="none">
-                <path
-                    d="M38.5 76.3C59.3764 76.3 76.3 59.3764 76.3 38.5C76.3 17.6236 59.3764 0.700012 38.5 0.700012C17.6236 0.700012 0.700012 17.6236 0.700012 38.5C0.700012 59.3764 17.6236 76.3 38.5 76.3Z"
-                    fill="#909090"/>
-              </svg>
-            </div>
-            <div class="reviews-body"></div>
-          </div>
-          <div class="review-item">
-            <div class="reviews-image">
-              <svg xmlns="http://www.w3.org/2000/svg" width="77" height="77" viewBox="0 0 77 77" fill="none">
-                <path
-                    d="M38.5 76.3C59.3764 76.3 76.3 59.3764 76.3 38.5C76.3 17.6236 59.3764 0.700012 38.5 0.700012C17.6236 0.700012 0.700012 17.6236 0.700012 38.5C0.700012 59.3764 17.6236 76.3 38.5 76.3Z"
-                    fill="#909090"/>
-              </svg>
-            </div>
-            <div class="reviews-body"></div>
-          </div>
-          <div class="review-item">
-            <div class="reviews-image">
-              <svg xmlns="http://www.w3.org/2000/svg" width="77" height="77" viewBox="0 0 77 77" fill="none">
-                <path
-                    d="M38.5 76.3C59.3764 76.3 76.3 59.3764 76.3 38.5C76.3 17.6236 59.3764 0.700012 38.5 0.700012C17.6236 0.700012 0.700012 17.6236 0.700012 38.5C0.700012 59.3764 17.6236 76.3 38.5 76.3Z"
-                    fill="#909090"/>
-              </svg>
-            </div>
-            <div class="reviews-body"></div>
-          </div>
-          <div class="review-item">
-            <div class="reviews-image">
-              <svg xmlns="http://www.w3.org/2000/svg" width="77" height="77" viewBox="0 0 77 77" fill="none">
-                <path
-                    d="M38.5 76.3C59.3764 76.3 76.3 59.3764 76.3 38.5C76.3 17.6236 59.3764 0.700012 38.5 0.700012C17.6236 0.700012 0.700012 17.6236 0.700012 38.5C0.700012 59.3764 17.6236 76.3 38.5 76.3Z"
-                    fill="#909090"/>
-              </svg>
-            </div>
-            <div class="reviews-body"></div>
-          </div>
-          <div class="review-item">
-            <div class="reviews-image">
-              <svg xmlns="http://www.w3.org/2000/svg" width="77" height="77" viewBox="0 0 77 77" fill="none">
-                <path
-                    d="M38.5 76.3C59.3764 76.3 76.3 59.3764 76.3 38.5C76.3 17.6236 59.3764 0.700012 38.5 0.700012C17.6236 0.700012 0.700012 17.6236 0.700012 38.5C0.700012 59.3764 17.6236 76.3 38.5 76.3Z"
-                    fill="#909090"/>
-              </svg>
-            </div>
-            <div class="reviews-body"></div>
-          </div>
-        </div>
+      <div class="container  q-py-lg">
+        <v-slider/>
       </div>
     </section>
     <section class=" q-mb-xl " style="width: 100%;position: relative; background:#169AC4">
       <div class="container">
         <div class="">
           <div class="flex justify-center no-wrap">
-            <div class="tabs flex justify-center" style="width: 60%;">
-              <p class="fz-60 text-white text-center">Выгодные тарифы</p>
-              <div style="max-width: 770px; background:#169AC4;">
+            <div class="tabs flex justify-center Rubik500" style="width: 60%;">
+              <p class="fz-60 text-white text-center  ">Выгодные тарифы</p>
+              <div style="max-width: 770px; background:#169AC4;" class="slider_metr">
                 <q-tabs
                     v-model="tab"
                     active-color="primary"
@@ -580,16 +536,16 @@
                     align="justify"
                     class="tabs-panel"
                 >
-                  <q-tab name="one" label="ОДИН СЧЕТЧИК"/>
-                  <q-tab name="two" label="ДВА СЧЕТЧИКА"/>
-                  <q-tab name="three" label="ТРИ СЧЕТЧИКА"/>
-                  <q-tab name=four label="ЧЕТЫРЕ СЧЕТЧИКА"/>
+                  <q-tab name="one" label="ОДИН СЧЕТЧИК" class="Rubik500 fz-16"/>
+                  <q-tab name="two" label="ДВА СЧЕТЧИКА" class="Rubik500 fz-16"/>
+                  <q-tab name="three" label="ТРИ СЧЕТЧИКА" class="Rubik500 fz-16"/>
+                  <q-tab name=four label="ЧЕТЫРЕ СЧЕТЧИКА" class="Rubik500 fz-16"/>
 
                 </q-tabs>
                 <q-separator color="grey" size="1.5px"/>
                 <q-tab-panels v-model="tab" animated class="tab-panels text-white" style="background:#169AC4">
                   <q-tab-panel name="one">
-                    <div class="flex no-wrap justify-end">
+                    <div class="flex no-wrap justify-end slider_item">
                       <div class="tab-text">
                         <p class="tab-text__title fz-60 text-white">от 650₽*</p>
                         <p class="tab-text__subtitle text-white">
@@ -605,7 +561,7 @@
                     </div>
                   </q-tab-panel>
                   <q-tab-panel name="two">
-                    <div class="flex no-wrap justify-end">
+                    <div class="flex no-wrap justify-end slider_item">
                       <div class="">
                         <p class="tab-text__title fz-60 text-white">от 1300₽*</p>
                         <p class="tab-text__subtitle text-white">Стоимость работы по поверке счетчика на дому, без
@@ -620,7 +576,7 @@
                     </div>
                   </q-tab-panel>
                   <q-tab-panel name="three">
-                    <div class="flex no-wrap justify-end">
+                    <div class="flex no-wrap justify-end slider_item">
                       <div class="">
                         <p class="tab-text__title fz-60 text-white">от 1950₽*</p>
                         <p class="tab-text__subtitle text-white">Стоимость работы по поверке счетчика на дому, без
@@ -635,7 +591,7 @@
                     </div>
                   </q-tab-panel>
                   <q-tab-panel name="four">
-                    <div class="flex no-wrap justify-end">
+                    <div class="flex no-wrap justify-end slider_item">
                       <div class="">
                         <p class="tab-text__title fz-60 text-white">от 2600₽*</p>
                         <p class="tab-text__subtitle text-white">Стоимость работы по поверке счетчика на дому, без
@@ -652,25 +608,8 @@
                 </q-tab-panels>
               </div>
             </div>
-            <div class="flex justify-center" style="width: 40%;background: #50505F">
-              <div class="recall_form flex column q-mt-lg justify-center">
-                <p class="text-center text-white posit">ОСТАВЬТЕ ЗАЯВКУ</p>
-                <q-input type="text" outlined class="q-pb-md"/>
-                <q-input type="text" outlined class="q-pb-md"/>
-                <p>Даю согласие на обработку персональных
-                  данных
-                  <svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M8.5 17.1C13.0287 17.1 16.7 13.4288 16.7 8.90002C16.7 4.37129 13.0287 0.700012 8.5 0.700012C3.97126 0.700012 0.299988 4.37129 0.299988 8.90002C0.299988 13.4288 3.97126 17.1 8.5 17.1Z"
-                        fill="#2258DC"/>
-                    <path d="M4.5 8.70001L6.79999 11L12.8 4.59998" stroke="white" stroke-width="2"
-                          stroke-miterlimit="10"/>
-                  </svg>
-                </p>
-                <q-btn class="q-pt-sm q-px-md form_send_btn">
-                  ОТПРАВИТЬ
-                </q-btn>
-              </div>
+            <div class="flex justify-center slider_form" style="width: 40%;background: #50505F">
+              <v-open-form class="dpNone"/>
             </div>
           </div>
         </div>
@@ -678,48 +617,58 @@
     </section>
     <section class="partners" style="width: 100%">
       <div class="container">
-        <div class="flex justify-around items-center" style="gap: 10px;width: 100%;">
-          <p class="text-bold fz-26">При поддержке</p>
-          <div class=""><img src="src/assets/documnet.png" alt="my doc" class="part_logo"></div>
-          <div class="partners_block"><img src="src/assets/gosusligi.png" alt="gosUslugi" class="part_logo"></div>
-          <div class="partners_block"><img src="src/assets/gburc.png" alt="gburc" class="part_logo"></div>
-          <div class="partners_block"><img src="src/assets/mosru.png" alt="mosru" class="part_logo"></div>
-          <div class="partners_block"><img src="src/assets/accred.png" alt="accred" class="part_logo"></div>
-          <div class="partners_block"><img src="src/assets/fso.png" alt="fso" class="part_logo"></div>
+        <div class="flex justify-center items-center no-wrap partners_block" style="gap: 20px">
+          <div class="text-bold fz-26">При поддержке</div>
+          <div class="flex items-center partners_block" style="gap: 10px">
+            <div class=""><img src="src/assets/documnet.png" alt="my doc" class="part_logo"></div>
+            <div class="partners_block"><img src="src/assets/gosusligi.png" alt="gosUslugi" class="part_logo"></div>
+            <div class="partners_block"><img src="src/assets/gburc.png" alt="gburc" class="part_logo"></div>
+            <div class="partners_block"><img src="src/assets/mosru.png" alt="mosru" class="part_logo"></div>
+            <div class="partners_block"><img src="src/assets/accred.png" alt="accred" class="part_logo"></div>
+            <div class="partners_block"><img src="src/assets/fso.png" alt="fso" class="part_logo"></div>
+          </div>
         </div>
       </div>
     </section>
     <section style="width: 100%;">
       <div class="container">
-        <div class="" style="margin: 0 auto">
-          <div class="flex column justify-center">
-            <div class="text-center fz-32 text-black">ВСЁ ЧТО НУЖНО ЗНАТЬ О ПОВЕРКЕ СЧЕТЧИКОВ ВОДЫ</div>
-            <div class="fz-16 text-black text-center" style="width: 30%; margin: 0 auto;">Как и когда нужно проводить
+        <div class=" q-pt-xl" style="margin: 0 auto">
+          <div class="flex column justify-center q-pt-xl">
+            <div class="text-center fz-32 text-black Rubik500">ВСЁ ЧТО НУЖНО ЗНАТЬ О ПОВЕРКЕ СЧЕТЧИКОВ ВОДЫ</div>
+            <div class="fz-16 text-black  Rubik400   q-pt-md" style="width: 40%; margin: 0 auto;">
+              Как и когда нужно проводить
               поверку счетчиков воды в
               Москве. Как узнать сроки проведения
               поверки счетчиков воды. Список необходимых документов для процедуры
             </div>
           </div>
-          <div class="">
+          <div class="list q-pt-xl">
             <q-list style="width: 100%;max-width: 900px; margin: 0 auto">
               <q-expansion-item
                   group="somegroup"
                   label="ОБЯЗАТЕЛЬНА ЛИ ПОВЕРКА СЧЕТЧИКОВ ВОДЫ И ЗАЧЕМ ОНА НУЖНА?"
                   default-opened
-                  header-class="text-bold"
                   class="q-pb-lg"
               >
                 <q-card>
-                  <q-card-section>
-                    Поверка индивидуальных приборов учета (ИПУ), или счетчиков — обязательная процедура. Это закреплено
-                    в статье 13 Федерального закона «Об обеспечении единства измерений» № 102-ФЗ от 26 июня 2008 года, а
-                    также в постановлении Правительства Российской Федерации № 354 от 6 мая 2011 года.
-                    Если не провести поверку вовремя, вы не сможете оплачивать горячую и холодную воду по показаниям
-                    приборов учета*. С 1-го числа месяца, следующего за месяцем, в котором необходимо было провести
-                    поверку, начисления будут проводиться так:
-                    первые 3 месяца — по среднерасчетным показаниям ваших счетчиков за последние полгода;
-                    с 4-го месяца — по показаниям общедомового прибора учета.
-                    Вы снова сможете оплачивать воду по показаниям счетчиков после проведения поверки.
+                  <q-card-section class="Rubik400 fz-16 accordion-list__text">
+                    <p>
+                      Поверка индивидуальных приборов учета (ИПУ), или счетчиков — обязательная процедура. Это
+                      закреплено
+                      в статье 13 Федерального закона «Об обеспечении единства измерений» № 102-ФЗ от 26 июня 2008 года,
+                      а
+                      также в постановлении Правительства Российской Федерации № 354 от 6 мая 2011 года.
+                    </p>
+                    <p>
+                      Если не провести поверку вовремя, вы не сможете оплачивать горячую и холодную воду по показаниям
+                      приборов учета*. С 1-го числа месяца, следующего за месяцем, в котором необходимо было провести
+                      поверку, начисления будут проводиться так:
+                    </p>
+                    <ul>
+                      <li>первые 3 месяца — по среднерасчетным показаниям ваших счетчиков за последние полгода;</li>
+                      <li>с 4-го месяца — по показаниям общедомового прибора учета.</li>
+                      <li>Вы снова сможете оплачивать воду по показаниям счетчиков после проведения поверки.</li>
+                    </ul>
                   </q-card-section>
                 </q-card>
               </q-expansion-item>
@@ -730,10 +679,9 @@
                   group="somegroup"
                   label="КОГДА НУЖНО ПРОВОДИТЬ ПОВЕРКУ?"
                   class="q-pb-lg"
-                  header-class="text-bold"
               >
                 <q-card>
-                  <q-card-section>
+                  <q-card-section class="accordion-list__text">
                     Интервал между поверками, или межповерочный интервал, устанавливается при утверждении типа средства
                     измерения и указывается в технической документации — паспорте счетчика.
                     Сроки поверки также можно узнать:
@@ -757,10 +705,9 @@
                   group="somegroup"
                   label="КТО ДОЛЖЕН ПРОВОДИТЬ ПОВЕРКУ СЧЕТЧИКОВ?"
                   class="q-pb-lg"
-                  header-class="text-bold"
               >
                 <q-card>
-                  <q-card-section>
+                  <q-card-section class="accordion-list__text">
                     Для проведения поверки счетчиков собственник (пользователь) помещения в многоквартирном доме должен
                     обратиться в специализированную организацию, имеющую аккредитацию. Вы можете выбрать ее
                     самостоятельно или обратиться за рекомендацией в управляющую компанию.
@@ -778,10 +725,9 @@
                   group="somegroup"
                   label="КАК ПРОХОДИТ ПОВЕРКА СЧЕТЧИКОВ ВОДЫ?"
                   class="q-pb-lg"
-                  header-class="text-bold"
               >
                 <q-card>
-                  <q-card-section>
+                  <q-card-section class="accordion-list__text">
                     При каких условиях будет проведена поверка ИПУ, зависит от оснащенности фирмы, с которой потребитель
                     заключит договор на поверку: есть у нее переносные приборы для проведения поверки или нет. Поверка
                     может проводиться:
@@ -800,10 +746,9 @@
                   group="somegroup"
                   label="СРОК ПОВЕРКИ НАСТУПИТ НЕСКОРО, НО МНЕ ЗВОНЯТ ЧТО БЫ ЕЕ ПРОВЕСТИ. ЧТО ДЕЛАТЬ"
                   class="q-pb-lg"
-                  header-class="text-bold"
               >
                 <q-card class="">
-                  <q-card-section>
+                  <q-card-section class="accordion-list__text">
                     Некоторые частные компании могут звонить или рассылать письма и предлагать свои услуги по поверке
                     счетчиков. Такая информация является рекламой коммерческих услуг и не накладывает на вас никаких
                     обязательств.
@@ -824,10 +769,9 @@
                   group="somegroup"
                   label="СКОЛЬКО СТОИТ ПОВЕРКА СЧЕТЧИКА ВОДЫ?"
                   class="q-pb-lg"
-                  header-class="text-bold"
               >
                 <q-card class="">
-                  <q-card-section>
+                  <q-card-section class="accordion-list__text">
                     Работы по замене, обслуживанию и поверке приборов учета выполняются на основании договора, который
                     вы как потребитель (собственник или наниматель помещения) заключаете с организацией.
 
@@ -843,10 +787,9 @@
                   group="somegroup"
                   label="ЧТО БУДЕТ ПОСЛЕ ПОВЕРКИ?"
                   class="q-pb-lg"
-                  header-class="text-bold"
               >
                 <q-card class="">
-                  <q-card-section>
+                  <q-card-section class="accordion-list__text">
                     По результатам поверки проводивший ее специалист должен в течение 40 дней с даты проведения поверки
                     внести данные о результатах работы в реестр ФГИС «Аршин». Доступ к этой системе открыт для всех. В
                     разделе «Сведения о результатах поверки средств измерений» владелец счетчика может ввести его
@@ -860,37 +803,38 @@
               </q-expansion-item>
               <q-separator/>
             </q-list>
-
           </div>
         </div>
-
       </div>
     </section>
     <section class="bg_blue q-mb-xl" style="width: 100%; height: 129px;position: relative">
       <div class="container">
         <div class="flex items-center justify-around check_district_box"
              style="position: absolute; top: 0;left: 0;bottom: 0;right: 0">
-          <p class="text-center text-white fz-32">УСТАНОВКА И ЗАМЕНА СЧЕТЧИКОВ ВОДЫ</p>
+          <p class="text-center text-white fz-32 Rubik500">УСТАНОВКА И ЗАМЕНА СЧЕТЧИКОВ ВОДЫ</p>
         </div>
       </div>
     </section>
     <section style="width: 100%;" class="q-mb-xl">
       <div class="container">
-        <div class="cards-meter flex justify-center">
+        <div class="cards-meter flex justify-center Rubik500">
           <div class="item-meter">
             <div class="item-image">
-              <img src="src/assets/zamena.png" alt="">
+              <img src="src/assets/zamena.png" alt="Zamena" style="width: auto;">
             </div>
-            <div class="item-text">
-              <p>
+            <div class="item-text flex">
+              <p class="fz-21 text-white">
                 Замена счетчика воды
               </p>
-              <p>Если не установить прибор учета,
-                оплата за воду будет начисляться по
-                нормативу. В этом случае вы
-                переплатите 50%, так как никто и
-                никогда не тратит такое количество
-                воды.</p>
+              <p class="">
+                <p class="text-white fz-16" style="max-width: 300px ; line-height: 200%;">Если не установить прибор
+                  учета,
+                  оплата за воду будет начисляться по
+                  нормативу. В этом случае вы
+                  переплатите 50%, так как никто и
+                  никогда не тратит такое количество
+                  воды.</p>
+              </p>
             </div>
           </div>
           <div class="item-meter">
@@ -898,17 +842,19 @@
               <img src="src/assets/zamena-2.png" alt="">
             </div>
             <div class="item-text">
-              <p>
+              <p class="fz-21 text-white">
                 Замена счетчика воды
               </p>
-              <p>
-                Специальные приборы учета позволят
-                производить замеры водопотребления
-                и оплачивать только тот объем воды,
-                который был действительно
-                израсходован. В данном случае
-                получится существенная переплата.
-              </p>
+              <div class="">
+                <p class="text-white fz-16" style="max-width: 270px ; line-height: 200%;">
+                  Специальные приборы учета позволят
+                  производить замеры водопотребления
+                  и оплачивать только тот объем воды,
+                  который был действительно
+                  израсходован. В данном случае
+                  получится существенная переплата.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -918,25 +864,7 @@
       <div class="container">
         <div class="flex justify-around">
           <div class="form_footer">
-
-            <div class="recall_form flex column q-mt-lg justify-center">
-              <p class="text-center text-white posit">ОСТАВЬТЕ ЗАЯВКУ</p>
-              <q-input type="text" outlined class="q-pb-md"/>
-              <q-input type="text" outlined class="q-pb-md"/>
-              <p>Даю согласие на обработку персональных
-                данных
-                <svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                      d="M8.5 17.1C13.0287 17.1 16.7 13.4288 16.7 8.90002C16.7 4.37129 13.0287 0.700012 8.5 0.700012C3.97126 0.700012 0.299988 4.37129 0.299988 8.90002C0.299988 13.4288 3.97126 17.1 8.5 17.1Z"
-                      fill="#2258DC"/>
-                  <path d="M4.5 8.70001L6.79999 11L12.8 4.59998" stroke="white" stroke-width="2"
-                        stroke-miterlimit="10"/>
-                </svg>
-              </p>
-              <q-btn class="q-pt-sm q-px-md form_send_btn">
-                ОТПРАВИТЬ
-              </q-btn>
-            </div>
+            <v-open-form/>
           </div>
           <div class="image_form_footer">
             <img src="src/assets/footer_form.png" alt="">
@@ -945,12 +873,12 @@
       </div>
     </section>
     <section class="" style="width: 100%;">
-      <h2 class="fz-32 text-center text-bold q-mb-lg">Цены:</h2>
-      <div class="bg_blue">
-        <q-list class="flex column justify-center items-center">
+      <h2 class="fz-32 text-center text-bold q-mb-lg Rubik500">Цены:</h2>
+      <div class="bg_blue Rubik400 list_box">
+        <q-list class="flex column justify-center items-center ">
           <q-item class="list-item">
             <q-item-section class="list-title__block">
-              <div class="list-title text-white fz-16">Поверка счетчика ХВС, поверка счетчика ГВС - для граждан
+              <div class="list-title text-white fz-16 ">Поверка счетчика ХВС, поверка счетчика ГВС - для граждан
                 пенсионного
                 возраста
               </div>
@@ -994,77 +922,78 @@
           </q-btn>
         </div>
 
-        <div class="" v-if="listOpen === true">
+        <div class="text-opacity" v-if="listOpen === true">
           <q-list class="flex column justify-center items-center " v-for="gen of listService[0].general">
             <q-item class="list-item">
               <q-item-section class="list-title__block">
-                <div class="list-title text-white fz-16">{{ gen.name }}
+                <div class="list-title fz-16">{{ gen.name }}
                 </div>
               </q-item-section>
               <q-item-section class="list-subtitle__block">
-                <div class="list-subtitle text-white fz-26">{{ gen.price }}</div>
+                <div class="list-subtitle  fz-21">{{ gen.price }}</div>
               </q-item-section>
             </q-item>
             <q-separator class="separator_list"/>
           </q-list>
 
-          <p class="text-white text-center fz-26 q-my-lg text-bold">САНТЕХНИЧЕСКИЕ РАБОТЫ</p>
-          <p class="text-white text-center fz-26 q-my-xl text-bold">СМЕСИТЕЛИ</p>
-          <q-list class="flex column justify-center items-center" v-for="faus of listService[0].plumbing[0].faucets">
+          <p class="text-white text-center fz-26 q-my-lg ">САНТЕХНИЧЕСКИЕ РАБОТЫ</p>
+          <p class="text-white text-center fz-26 q-my-xl ">СМЕСИТЕЛИ</p>
+          <q-list class="flex column justify-center items-center text-opacity"
+                  v-for="faus of listService[0].plumbing[0].faucets">
             <q-item class="list-item">
               <q-item-section class="list-title__block">
-                <div class="list-title text-white fz-16">{{ faus.name }}</div>
+                <div class="list-title  fz-16">{{ faus.name }}</div>
               </q-item-section>
               <q-item-section class="list-subtitle__block">
-                <div class="list-subtitle text-white fz-26">{{ faus.price }}</div>
+                <div class="list-subtitle  fz-21">{{ faus.price }}</div>
               </q-item-section>
             </q-item>
             <q-separator class="separator_list"/>
           </q-list>
 
-          <p class="text-white text-center fz-26 q-my-xl text-bold">РАКОВИНЫ</p>
+          <p class="text-white text-center fz-26 q-my-xl ">РАКОВИНЫ</p>
 
-          <q-list class="flex column justify-center items-center" v-for="shell of listService[0].plumbing[0].shells">
-            <q-item class="list-item">
+          <q-list class="flex column justify-center items-center text-opacity"
+                  v-for="shell of listService[0].plumbing[0].shells">
+            <q-item class="list-item text-opacity">
               <q-item-section class="list-title__block">
-                <div class="list-title text-white fz-16">{{ shell.name }}</div>
+                <div class="list-title  fz-16">{{ shell.name }}</div>
               </q-item-section>
               <q-item-section class="list-subtitle__block">
-                <div class="list-subtitle text-white fz-26">{{ shell.price }}</div>
+                <div class="list-subtitle  fz-21">{{ shell.price }}</div>
               </q-item-section>
             </q-item>
             <q-separator class="separator_list"/>
           </q-list>
 
-          <p class="text-white text-center fz-26 q-my-xl text-bold">Унитазы</p>
+          <p class="text-white text-center fz-26 q-my-xl">Унитазы</p>
 
-          <q-list class="flex column justify-center items-center" v-for="toul of listService[0].plumbing[0].toilet">
-            <q-item class="list-item">
+          <q-list class="flex column justify-center items-center text-opacity"
+                  v-for="toul of listService[0].plumbing[0].toilet">
+            <q-item class="list-item text-opacity">
               <q-item-section class="list-title__block">
-                <div class="list-title text-white fz-16">{{ toul.name }}</div>
+                <div class="list-title  fz-16">{{ toul.name }}</div>
               </q-item-section>
               <q-item-section class="list-subtitle__block">
-                <div class="list-subtitle text-white fz-26">{{ toul.price }}</div>
+                <div class="list-subtitle  fz-21">{{ toul.price }}</div>
               </q-item-section>
             </q-item>
             <q-separator class="separator_list"/>
           </q-list>
-
-          <p class="text-white text-center fz-26 q-my-xl text-bold">Прочие сантехнические работы</p>
-
+          <p class="text-white text-center fz-26 q-my-xl  text-opacity">Прочие сантехнические работы</p>
           <q-list class="flex column justify-center items-center" v-for="other of listService[0].others">
             <q-item class="list-item">
               <q-item-section class="list-title__block">
-                <div class="list-title text-white fz-16">{{ other.name }}</div>
+                <div class="list-title  fz-16">{{ other.name }}</div>
               </q-item-section>
               <q-item-section class="list-subtitle__block">
-                <div class="list-subtitle text-white fz-26">{{ other.price }}</div>
+                <div class="list-subtitle  fz-26">{{ other.price }}</div>
               </q-item-section>
             </q-item>
             <q-separator class="separator_list"/>
           </q-list>
           <div class="flex justify-center q-py-lg">
-            <q-btn class="text-white bg-red list-sendCall">ЗАКАЗАТЬ УСЛУГУ</q-btn>
+            <q-btn class="text-white bg-red list-sendCall" @click="openFormModal = true">ЗАКАЗАТЬ УСЛУГУ</q-btn>
           </div>
         </div>
       </div>
@@ -1076,7 +1005,7 @@
             <p class="fz-26 text-bold text-center">Ваш район</p>
             <p class="text-blue-5 fz-16 text-bold">125 районов и 10 округов</p>
           </div>
-          <q-btn class="text-white bg-red map-sendCall">ЗАКАЗАТЬ УСЛУГУ</q-btn>
+          <q-btn class="text-white bg-red map-sendCall" @click="openFormModal = true">ЗАКАЗАТЬ УСЛУГУ</q-btn>
         </div>
       </div>
     </section>
@@ -1084,21 +1013,43 @@
       <div class="container">
         <div class="flex justify-around text-white">
           <div class="img_footer">
-            <img src="src/assets/logo-header.svg" alt="logo_footer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="74" height="87" viewBox="0 0 74 87" fill="none">
+              <path d="M34.4 9.19989V0.899902H72.9V72.3999H53.6V11.9999H16V72.3999H34.4V23.8999H19.5" stroke="white"
+                    stroke-width="1.5758" stroke-miterlimit="10"/>
+              <path d="M12.4 23.8999H1.09998V73.1999" stroke="white" stroke-width="1.5758" stroke-miterlimit="10"/>
+              <path
+                  d="M6.39999 81.9V85.8H5.5V81.9L5.29999 81.7L1.79999 85.9H0.700012L4.70001 81.3L1 77.5H2.10001L5.5 81V77.5H6.39999V81L9.79999 77.5H10.9L7.20001 81.3L11.2 85.9H10.1L6.60001 81.7L6.39999 81.9Z"
+                  fill="white"/>
+              <path d="M19.1 85.9H18.2V79.4L12.6 85.9H12.4V77.5H13.3V84L18.9 77.5H19.1V85.9Z" fill="white"/>
+              <path d="M28 85.9H27.1L24.3 79.4L21.5 85.9H20.6L24.3 77.5H24.5L28 85.9Z" fill="white"/>
+              <path d="M36 85.9H35.1V79.4L29.5 85.9H29.3V77.5H30.2V84L35.8 77.5H36V85.9Z" fill="white"/>
+              <path
+                  d="M47.9 84.9998H49.3V86.9998H48.5V85.6998H38V77.2998H38.9V84.8998H42.5V77.2998H43.3V84.8998H47V77.2998H47.9C47.9 77.3998 47.9 84.9998 47.9 84.9998Z"
+                  fill="white"/>
+              <path d="M50.6 77.3999H51.5V80.8999H55.8V77.3999H56.7V85.7999H55.8V81.6999H51.5V85.7999H50.6V77.3999Z"
+                    fill="white"/>
+              <path d="M65.3 85.9H64.4V79.4L58.8 85.9H58.6V77.5H59.5V84L65.1 77.5H65.3V85.9Z" fill="white"/>
+              <path
+                  d="M67.3 77.3999H68.2V80.5999L71.6 77.3999H72.7L68.7 81.1999L73 85.7999H71.9L68.2 81.8999V85.7999H67.3V77.3999Z"
+                  fill="white"/>
+            </svg>
           </div>
           <div class="footer_mid">
-            <p><a href="#">Политика конфиденциальности</a></p>
-            <p><a href="#">Пользовательское соглашение</a></p>
+            <p class="Rubik400 fz-16 text-white cursor link_policy" @click="modalPolicy = true">Политика
+              конфиденциальности </p>
+            <p class="Rubik400 fz-16 text-white cursor link_policy" @click="modalTerms = true">Пользовательское
+              соглашение</p>
           </div>
           <div class="footer_links flex column items-end">
-            <p>2023, «ЖИЛИЩНИК»</p>
-            <p>8(800) 555-22-39</p>
-            <p>Москва, ул. Тихомирова, д. 17 к 1, пом. 14/1</p>
-            <p>Служба контроля качества help@jil-mos.ru</p>
+            <p class="Rubik500 fz-16">2023, «ЖИЛИЩНИК»</p>
+            <p class="Rubik500 fz-16">8(800) 555-22-39</p>
+            <p class="Rubik500 fz-16">Москва, ул. Тихомирова, д. 17 к 1, пом. 14/1</p>
+            <p class="Rubik500 fz-16">Служба контроля качества help@jil-mos.ru</p>
           </div>
         </div>
         <div class="q-pb-xl">
-          <p class="text-center text-white">Поверка счетчиков воды в Москве без снятия. Все права защищены</p>
+          <p class="text-center text-white Rubik500 fz-16">Поверка счетчиков воды в Москве без снятия. Все права
+            защищены</p>
         </div>
       </div>
     </footer>
@@ -1107,9 +1058,18 @@
 
 <script setup>
 import {ref} from "vue";
+import VOpenForm from "components/v-OpenForm.vue";
+import VModalForm from "components/v-modal-form.vue";
+import {useQuasar} from "quasar";
+import axios from "axios";
+import VPolicy from "components/v-policy.vue";
+import TermsOfUse from "components/termsOfUse.vue";
+import VSlider from "components/v-slider.vue";
 
+const $q = useQuasar()
 const tab = ref('one')
 const listOpen = ref(false)
+const openFormModal = ref(false)
 const listService = ref([
   {
     general: [
@@ -1118,44 +1078,20 @@ const listService = ref([
       {name: 'Замена счетчика VALTEC', price: '2700₽ '},
       {name: 'Замена прокладок', price: '1000₽ '},
       {name: 'Замена опорной арматуры', price: '2000₽'},
-      {name: '', price: ''},
-      {name: '', price: ''},
-      {name: '', price: ''},
-      {name: '', price: ''},
-      {name: '', price: ''},
-      {name: '', price: ''},
-      {name: '', price: ''},
-      {name: '', price: ''},
-      {name: '', price: ''},
     ],
     plumbing: [
       {
         faucets: [
           {name: 'Услуга', price: 'Стоимость от'},
           {name: 'Монтаж смесителя', price: '1500₽'},
-          {name: '', price: ''},
-          {name: '', price: ''},
-          {name: '', price: ''},
-          {name: '', price: ''},
-          {name: '', price: ''},
         ],
         shells: [
           {name: 'Услуга', price: 'Стоимость от'},
           {name: 'Монтаж раковины', price: '2000₽'},
-          {name: '', price: ''},
-          {name: '', price: ''},
-          {name: '', price: ''},
-          {name: '', price: ''},
-          {name: '', price: ''},
         ],
         toilet: [
           {name: 'Услуга', price: 'Стоимость от'},
           {name: 'Монтаж унитаза', price: '2000'},
-          {name: '', price: ''},
-          {name: '', price: ''},
-          {name: '', price: ''},
-          {name: '', price: ''},
-          {name: '', price: ''},
         ]
       }
     ],
@@ -1163,19 +1099,57 @@ const listService = ref([
       {name: 'Услуга', price: 'Стоимость от'},
       {name: 'Монтаж фильтров', price: '1500 ₽'},
       {name: 'Монтаж и подключение редукторов', price: '1500 ₽'},
-      {name: '', price: ''},
-      {name: '', price: ''},
-      {name: '', price: ''},
-      {name: '', price: ''},
-      {name: '', price: ''},
-      {name: '', price: ''},
-      {name: '', price: ''},
-      {name: '', price: ''},
-      {name: '', price: ''},
     ]
   }
-
 ])
+const nameInput = ref('')
+const phoneInput = ref('')
+const modalPolicy = ref(false)
+const modalTerms = ref(false)
+
+/*----------------------------------------- Функция получения последней заявки  --------------------------------------*/
+let count
+let lastId
+const getLastId = async () => {
+  let next_id = await axios.get('https://sale.ismos.isp.sprint.1t.ru/assets/getInfo.php')
+  let id = await next_id.data
+  lastId = await id.split('}')
+  count = lastId.length - 1
+  console.log(count)
+}
+/*----------------------------------------- Функция отправки  в телеграм  --------------------------------------*/
+const emit = defineEmits(['closeModal'])
+const sendFormToCall = async () => {
+  try {
+    $q.loading.show({
+      message: 'Ваша заявка <b>process</b> в процессе <br/><span class="text-amber text-italic">Пожалуйста подождите....</span>',
+      html: true
+    })
+    await getLastId()
+    let res = await axios.post("https://sale.ismos.isp.sprint.1t.ru/assets/telegramRequest.php", {
+      Project: 'Жилищник',
+      title: 'Заявка на услугу!',
+      id: count,
+      name: nameInput.value,
+      phone: phoneInput.value
+    })
+    if (res.status === 200) {
+      emit('closeModal', false)
+      document.cookie = "Call=true ; path=/index.html ; max-age=86400"
+      console.log('OK')
+      $q.loading.hide()
+      nameInput.value = ''
+      phoneInput.value = ''
+    } else {
+      console.log('Error')
+      alert('ERROR')
+    }
+    emit('reCallback', false)
+  } catch (e) {
+    console.log(e)
+  }
+}
+
 </script>
 
 <style>
@@ -1190,55 +1164,21 @@ const listService = ref([
 }
 
 
-.fz-150 {
-  font-size: 150px;
-}
-
-.fz-90 {
-  font-size: 90px;
-}
-
-.fz-60 {
-  font-size: 60px;
-}
-
-.fz-32 {
-  font-size: 32px;
-}
-
-.fz-26 {
-  font-size: 26px;
-}
-
-.fz-16 {
-  font-size: 16px;
-}
-
-.Rubik400 {
-  font-family: "Rubik-regular";
-}
-
-.Rubik500 {
-  font-family: Rubik-Medium;
-}
-
 .main_promo {
   position: relative;
   width: 100%;
   background: url("src/assets/main_promo-bg.svg") no-repeat;
-  background-size: cover;
+  background-size: contain;
 }
 
 .main_promo_title {
   margin: 0;
-  padding-bottom: 2%;
-  padding-left: 14%;
-  min-height: 1080px;
+  padding-left: 3%;
+  min-height: 56vw;
   width: 100%;
   color: #FFF;
-  font-family: Rubiklight;
-  font-size: 120px;
-  font-weight: 700;
+  font-size: 7vw;
+  font-weight: 500;
   line-height: 1.4em;
 }
 
@@ -1251,10 +1191,11 @@ const listService = ref([
 
 .form_gap {
   gap: 20px;
+  flex-wrap: nowrap;
 }
 
 .input_form {
-  color: #F2F2F2;
+  color: #F2F2F2 !important;
   font-family: RubikLight;
   font-size: 32px;
   font-style: normal;
@@ -1266,10 +1207,10 @@ const listService = ref([
   padding: 27px 33px;
   border-radius: 50px;
   color: #FFF;
-  font-family: RubikLight;
+  font-family: Rubik-Medium;
   font-size: 32px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
   line-height: normal;
   border: none;
 
@@ -1288,6 +1229,15 @@ const listService = ref([
 .list_plus {
   width: 50%;
   gap: 10%;
+}
+
+.items_plus__subtitle {
+  color: #958F8C;
+
+  font-size: 16.465px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .plus_company {
@@ -1329,6 +1279,8 @@ const listService = ref([
 
 .info_arshin_text {
   max-width: 521px;
+
+
 }
 
 .link_to_site {
@@ -1337,7 +1289,6 @@ const listService = ref([
   border-radius: 20px;
   text-decoration: none;
   color: #000;
-  font-family: RubikLight;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
@@ -1360,11 +1311,8 @@ const listService = ref([
 
 .text-check_district {
   color: #FFF;
-
-  font-family: RubikLight;
   font-size: 25.75px;
   font-style: normal;
-  font-weight: 600;
   line-height: normal;
 }
 
@@ -1397,6 +1345,7 @@ const listService = ref([
 }
 
 .step_check {
+  padding-left: 15px;
   width: 100%;
 }
 
@@ -1410,10 +1359,10 @@ const listService = ref([
 /*recall_form*/
 
 .recall_form {
-  border-radius: 10px;
+  border-radius: 20px !important;
   max-width: 480px;
-  max-height: 430px;
-  padding: 66px 53px;
+  padding: 60px 53px;
+  margin: 70px;
   background: #169AC4;
 }
 
@@ -1421,9 +1370,11 @@ const listService = ref([
   max-width: 140px;
   background: #D43D46;
   border-radius: 20px;
+  padding: 14px 25px;
   color: white;
   margin: 0 auto;
 }
+
 
 .metr_form {
   width: 100%;
@@ -1431,9 +1382,21 @@ const listService = ref([
 
 .champ_image {
   border-radius: 20px;
+  max-width: 600px;
+  width: 90vw;
 }
 
 /*about company*/
+.item_text {
+  color: #000;
+  text-align: center;
+  font-family: RobotoRegular;
+  font-size: 21px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
 .card_company {
   border-radius: 20px;
   background: #F9F9F9;
@@ -1442,7 +1405,7 @@ const listService = ref([
   align-items: center;
   flex-wrap: nowrap;
   gap: 10px;
-  max-width: 411px;
+  max-width: 390px;
   padding: 5px;
 }
 
@@ -1452,13 +1415,12 @@ const listService = ref([
 
 .text-company-h3 {
   font-size: 20px;
-  font-weight: bold;
   margin: 0;
 }
 
 .text-company-subtitle {
   font-size: 16px;
-  max-width: 280px;
+  max-width: 300px;
 }
 
 /*  Reviews */
@@ -1507,10 +1469,12 @@ const listService = ref([
 /* Zamena */
 .cards-meter {
   justify-content: space-around;
+  gap: 10px;
 
 }
 
 .item-meter {
+  width: 100%;
   max-width: 750px;
   display: flex;
   gap: 10px;
@@ -1525,7 +1489,7 @@ const listService = ref([
 }
 
 .list-title__block {
-  flex-grow: 6;
+  flex-grow: 2;
 }
 
 .list-subtitle__block {
@@ -1568,5 +1532,11 @@ const listService = ref([
 /*footer */
 .bg_blue {
   background: #14ABD6;
+}
+
+.link_policy:hover {
+  color: white;
+  text-decoration: underline;
+  cursor: pointer;
 }
 </style>
