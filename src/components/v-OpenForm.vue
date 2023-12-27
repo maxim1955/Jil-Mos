@@ -28,7 +28,8 @@
       </div>
     </div>
 
-    <q-btn class="q-pt-sm q-px-md form_send_btn fz-16 Rubik500" @click="sendFormToCall" >
+    <q-btn class="q-pt-sm q-px-md form_send_btn fz-16 Rubik500" @click="sendFormToCall"
+           :disable="nameInput.length<3 || phoneInput.length<16|| !checkBoxInput">
       ОТПРАВИТЬ
     </q-btn>
   </div>
@@ -37,6 +38,7 @@
 import {ref} from "vue";
 import axios from "axios";
 import {useQuasar} from "quasar";
+
 const $q = useQuasar()
 const regexpName = /^[а-яА-ЯёЁ\s]/;
 
@@ -49,11 +51,11 @@ const checkBoxInput = ref(true)
 /*----------------------------------------- Функция получения последней заявки  --------------------------------------*/
 let count
 let lastId
-const getLastId = async ()=>{
+const getLastId = async () => {
   let next_id = await axios.get('https://sale.ismos.isp.sprint.1t.ru/assets/getInfo.php')
   let id = await next_id.data
   lastId = await id.split('}')
-  count = lastId.length-1
+  count = lastId.length - 1
   console.log(count)
 }
 /*----------------------------------------- Функция отправки  в телеграм  --------------------------------------*/
@@ -88,7 +90,6 @@ const sendFormToCall = async () => {
     console.log(e)
   }
 }
-
 
 
 </script>

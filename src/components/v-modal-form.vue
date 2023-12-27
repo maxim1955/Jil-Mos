@@ -198,6 +198,5 @@ const sendFormToCall = async () => {
 
 .btn_close {
   max-width: fit-content;
-  border: 1px solid red;
 }
 </style>

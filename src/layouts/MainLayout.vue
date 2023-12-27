@@ -13,12 +13,10 @@
             >
               <q-route-tab
                   to="/mails"
-
                   label="Поверка счетчиков"
               />
               <q-route-tab
                   to="/mails"
-
                   label="Порядок проведения"
               />
               <q-route-tab
@@ -27,12 +25,10 @@
               />
               <q-route-tab
                   to="/mails"
-
                   label="Важно знать"
               />
               <q-route-tab
                   to="/mails"
-
                   label="Контакты"
               />
 
@@ -59,8 +55,9 @@
             </div>
           </div>
           <div class="">
-            <q-btn color="white" class="bg-blue" rounded @click="openFormModal = true">
+            <q-btn color="white" class="bg-blue anim_btn" rounded @click="openFormModal = true">
               ЗАКАЗАТЬ ЗВОНОК
+              <span class="flare"></span>
             </q-btn>
           </div>
         </div>
@@ -132,6 +129,10 @@ const openFormModal = ref(false)
 
 </script>
 <style>
+.header_logo {
+  width: 90px;
+}
+
 .container {
   max-width: 1920px;
   margin: 0 auto;

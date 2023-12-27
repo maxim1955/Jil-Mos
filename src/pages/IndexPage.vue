@@ -6,8 +6,9 @@
     <div class="main_promo">
       <div class="container">
         <h1 class="main_promo_title Rubik500">
-          Поверка счетчиков воды <br> в Москве от <span class="text-red Rubik500 fz-650">650₽</span><br> <span
-            class="fz-home">НА ДОМУ БЕЗ СНЯТИЯ</span>
+          Поверка счетчиков воды <br> в Москве от
+          <span class=" Rubik500 fz-650" style="color: rgba(212, 61, 70, 1)">650₽</span><br>
+          <span class="fz-home">НА ДОМУ БЕЗ СНЯТИЯ</span>
         </h1>
         <q-form class="flex column form_main">
           <div class="flex form_gap">
@@ -18,6 +19,8 @@
                 label-color="white"
                 label="Ваше имя*"
                 color="white"
+                :rules="[ (val,rules) => val.length >= 3 || 'Минимальное количество 3 знака!!', (val,rules) => regexpName.test(nameInput) || 'Ввод только кириллица']"
+
             />
             <q-input
                 v-model="phoneInput"
@@ -31,14 +34,17 @@
             <button
                 type="submit"
                 rounded
-                class="btn_submit bg-red"
+                class="btn_submit anim_btn"
                 @click="sendFormToCall"
+                style="background: rgba(214, 67, 80, 1)"
+                :disabled="nameInput.length <3 || phoneInput.length<16"
             >
               ЗАКАЗАТЬ ПОВЕРКУ
+              <span class="flare"></span>
             </button>
           </div>
-          <p class="text-white pol_conf">Отправляя форму, я даю свое согласие на обработку <a href="#">персональных
-            данных</a>
+          <p class="text-white pol_conf Rubik500">Отправляя форму, я даю свое согласие на обработку
+            <a href="#" class="arrow-3" @click="modalPolicy = true">персональных данных</a>
           </p>
         </q-form>
       </div>
@@ -256,7 +262,9 @@
           <p class="text-white text-check_district Rubik500 fz-21">ВАЖНО! Поверяем счётчики воды во всех районах
             Москвы
           </p>
-          <button class="bg-red text-white btn_district Rubik500 fz-16" @click="openFormModal = true">ЗАКАЗАТЬ УСЛУГУ
+          <button class="bg-red text-white btn_district Rubik500 fz-16 anim_btn" @click="openFormModal = true">ЗАКАЗАТЬ
+            УСЛУГУ
+            <span class="flare"></span>
           </button>
         </div>
       </div>
@@ -518,7 +526,7 @@
       </div>
     </section>
     <section class="reviews-section">
-      <div class="container  q-py-lg">
+      <div class="container  q-py-lg reviews-container">
         <v-slider/>
       </div>
     </section>
@@ -1066,6 +1074,7 @@ import VPolicy from "components/v-policy.vue";
 import TermsOfUse from "components/termsOfUse.vue";
 import VSlider from "components/v-slider.vue";
 
+const regexpName = /^[а-яА-ЯёЁ\s]/;
 const $q = useQuasar()
 const tab = ref('one')
 const listOpen = ref(false)
@@ -1153,6 +1162,18 @@ const sendFormToCall = async () => {
 </script>
 
 <style>
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:hover::after {
+  content: ""
+}
+
 .bag-grey {
   width: 100%;
   background: rgba(128, 128, 128, 0.26);
@@ -1167,19 +1188,21 @@ const sendFormToCall = async () => {
 .main_promo {
   position: relative;
   width: 100%;
-  background: url("src/assets/main_promo-bg.svg") no-repeat;
+  background: url("src/assets/main_bg.svg") no-repeat rgba(53, 203, 226, 1);
   background-size: contain;
+  margin-top: -3%;
 }
 
 .main_promo_title {
-  margin: 0;
-  padding-left: 3%;
-  min-height: 56vw;
+  padding-top: 5%;
+  padding-left: 24%;
+  min-height: 36vw;
   width: 100%;
   color: #FFF;
-  font-size: 7vw;
+  font-size: 4vw;
   font-weight: 500;
   line-height: 1.4em;
+  text-shadow: -3px 4px rgba(0, 0, 0, 0.25);
 }
 
 /*FORM*/
@@ -1204,25 +1227,26 @@ const sendFormToCall = async () => {
 }
 
 .btn_submit {
-  padding: 27px 33px;
+  padding: 26px 30px;
   border-radius: 50px;
   color: #FFF;
   font-family: Rubik-Medium;
-  font-size: 32px;
+  font-size: 22px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
   border: none;
+  max-width: 285px;
 
 }
 
 .pol_conf {
   color: #FFF;
-  font-family: RubikLight;
   font-size: 24px;
   font-style: normal;
-  font-weight: 700;
-  line-height: normal;
+  line-height: 28px;
+  position: relative;
+  z-index: 10;
 }
 
 /*plus*/
@@ -1388,10 +1412,11 @@ const sendFormToCall = async () => {
 
 /*about company*/
 .item_text {
+  max-width: 387px;
   color: #000;
   text-align: center;
   font-family: RobotoRegular;
-  font-size: 21px;
+  font-size: 17px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -1428,20 +1453,26 @@ const sendFormToCall = async () => {
   padding: 15px;
   width: 100%;
   gap: 10px;
+
 }
 
 .review-item {
   background: white;
-  box-shadow: #1976D2;
-  max-width: 250px;
-  width: 311px;
+  width: 100%;
   height: 250px;
   border-radius: 20px;
+  padding: 5%;
+  max-width: 275px;
+  margin-bottom: 6%;
+  fill: #FFF;
+  stroke-width: 0.3px;
+  stroke: #B9B9B9;
+  filter: drop-shadow(-3px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .reviews-section {
   width: 100%;
-  background: #867979;
+  background: radial-gradient(218.38% 35.83% at 50% 49.99%, #F0F0F0 0%, #F2F2F2 71.15%, #F8F8F8 96.74%, #FAFAFA 100%);;
 }
 
 /*Tab*/
@@ -1538,5 +1569,9 @@ const sendFormToCall = async () => {
   color: white;
   text-decoration: underline;
   cursor: pointer;
+}
+
+.reviews-container {
+  width: 90%;
 }
 </style>
