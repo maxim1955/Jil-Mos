@@ -5,6 +5,7 @@
         :slidesPerView="3"
         :scrollbar="{ draggable: true }"
         @swiper="onSwiper"
+        :mousewheel="true"
         @slideChange="onSlideChange"
         :breakpoints="{
         '320': {
@@ -30,7 +31,7 @@
     }"
     >
       <swiper-slide v-for="rev of reviewsList" class="flex justify-center items-center">
-        <div style="" class="review-item flex column justify-between">
+        <div  class="review-item flex column justify-between">
           <p class="Rubik500">
             {{ rev.name }}
             <span style="color: yellow; font-size: 20px;" v-for="n of rev.rating">
@@ -56,9 +57,8 @@
     </span>
           </a>
           <p class="Rubik500 text-grey-8">
-
             <a
-                :href="rev.rating"
+                :href="rev.link"
                 target="_blank" rel="noopener noreferrer" class="review-link">
               <img :src="rev.image" class="img_reviews"/>
             </a>
@@ -70,49 +70,38 @@
 
 </template>
 <script setup>
-import {Navigation, Pagination, Scrollbar, A11y} from 'swiper/modules';
-import {Swiper, SwiperSlide, useSwiper} from 'swiper/vue';
-import 'swiper/css';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
+import {Navigation, Pagination, Scrollbar, A11y, Mousewheel} from 'swiper/modules';
+import {Swiper, SwiperSlide} from 'swiper/vue';
 
-const onSwiper = (swiper) => {
-  console.log(swiper);
-};
-const onSlideChange = () => {
-  console.log('slide change');
-};
-const modules = [Navigation, Pagination, Scrollbar, A11y];
+const modules = [Navigation, Pagination, Scrollbar, A11y,Mousewheel];
 const reviewsList = [
   {
     name: 'Аноним5533586',
     rating: 5,
     body: "Обратилась в фирму СТМ по замене счетчиков воды.Позвонили, обсудили заранее удобное время, в связи с загруженностью работы, оно очень ограниченное.На следующий день мастер позвонил за час и приехал во время, как и договаривались.Все очень быстро, аккуратно, чист.",
     link: 'https://otzovik.com/review_15083228.html',
-    image: 'src/assets/reviews_img/otzovik_reviews.png'
+    image: 'assets/otzovik_reviews.png'
   },
   {
     name: 'Vasiliy377',
     rating: 5,
     body: 'Приехал мастер, сделал поверку, счетчики не прошли, сделал замену. Все понравилось, сделал хорошо. Спасибо!',
     link: 'https://otzovik.com/review_15178878.html',
-    image: 'src/assets/reviews_img/otzovik_reviews.png'
+    image: 'assets/otzovik_reviews.png'
   },
   {
     name: 'Макар Зубко',
     rating: 5,
     body: 'Оператор очень внимательная и позитивная девушка: все обстоятельно разъяснила, объяснила, оформила заказ. Мастер пришел в указанное время. Вежливый, аккуратный, все четко по делу. Поверил счетчики, оформил документы. Сразу видно, что человек знает свою работу. Цена хорошая. Замечений нет, работой доволен, обращюсь еще.',
     link: 'https://zoon.ru/msk/utility_service/kompaniya_stm_na_prospekte_mira/#comment6580894e619e7a760c0d1b1b',
-    image: 'src/assets/reviews_img/zoon_reviews.png'
+    image: 'assets/zoon_reviews.png'
   },
   {
     name: 'Юлия Леонова',
     rating: 5,
     body: 'Мастера вызвала для поверки счетчиков на выходной день, человек приехал точно к оговоренному времени (и даже еще за час позвонил и предупредил), с работой долго не возился (максимум минут 20—30 ушло на все), по завершении выдал документы и чек. Профессиональный подход не может не радовать, поэтому смело рекомендую организацию.',
     link: 'https://zoon.ru/msk/utility_service/kompaniya_stm_na_prospekte_mira/#comment655e360565633558ce063e0e',
-    image: 'src/assets/reviews_img/zoon_reviews.png'
+    image: 'assets/zoon_reviews.png'
   },
   {
     name: 'Ольга П.',
@@ -121,32 +110,35 @@ const reviewsList = [
         'Буду и в следующий раз обращаться в эту организацию, когда наступит срок для другого счетчика.\n' +
         'Спасибо всем!',
     link: 'https://yandex.ru/web-maps/org/136170273560/reviews?reviews[publicId]=faum5uv856ye0zcda3j0qj3x58&utm_source=review',
-    image: 'src/assets/reviews_img/yandex_reviews.png'
+    image: 'assets/yandex_reviews.png'
   },
   {
     name: 'Никита Сахаров',
     rating: 5,
     body: 'Спасибо огромное мастеру Евтееву Григорию! Всё очень оперативно, аккуратно! Позвонил за час, пришел минута в минуту! Рассказал как будет проходить поверка. Во время поверки рассказал про все тонкости, что бывает со счетчиками, какие лучше ставить, как влияет качество воды и труб на состояние приборов учета. Организация работы тоже на высоте - позвонили оставить заявку на поверку и сразу же в ближайший день назначили дату! Всем поверять счетчики только в СТМ!!!',
     link: 'https://yandex.ru/web-maps/org/136170273560/reviews?reviews[publicId]=euh7401frhxzvj6q1q1hbg9494&utm_source=review',
-    image: 'src/assets/reviews_img/yandex_reviews.png'
+    image: 'assets/yandex_reviews.png'
   },
   {
     name: 'VSADNIK 07',
     rating: 5,
     body: 'Сегодня была поверка счетчика холодной воды. Приехал Мастер Грицай Александр позвонил с утра, но я не смог вовремя ответить, поэтому работы проводились позже чем могли бы. Мастер приехал со своим оборудованием и тапочками, что порадовало, пролил через оборудование воду, снял показатели на фото, повесил у счетчика спец.бирку, заполнил бумаги, принял оплату, все быстро и четко! Меня все устроило! Делаю у них поверку уже не первый раз, и менять компанию пока не вижу смысла!',
     link: 'https://maps.app.goo.gl/MMpMqoeBAu3xaGhi7',
-    image: 'src/assets/reviews_img/google_reviews.png'
+    image: 'assets/google_reviews.png'
   },
   {
     name: 'Александр Чапарский',
     rating: 5,
     body: 'Появилась необходимость сделать поверку 4 приборов учёта воды. Заказал поверку в этой конторе, были сомнения из-за отзывов. Как я понял, это отзывы тех, у кого счётчики поверку не прошли. К счастью, это не мой случай. Все 4 прибора годны, поверку делал сотрудник Евтеев',
     link: 'https://maps.app.goo.gl/nk9sEhQRA1bRKrcR9',
-    image: 'src/assets/reviews_img/google_reviews.png'
+    image: 'assets/google_reviews.png'
   }
 ]
 </script>
 <style>
+@import 'swiper/css';
+@import 'swiper/css/scrollbar';
+
 .swiper {
   width: 90% !important;
 }

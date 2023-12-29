@@ -13,7 +13,7 @@ let count
 let lastId
 
 const getLastId = async ()=>{
-    let next_id = await axios.get('https://sale.ismos.isp.sprint.1t.ru/assets/getInfo.php')
+    let next_id = await axios.get('https://jil-mos.isp.sprint.1t.ru/assets/getInfo.php')
     let id = await next_id.data
     lastId = await id.split('}')
     count = lastId.length-1
@@ -29,7 +29,7 @@ const sendFormToCall = async () => {
             html: true
         })
         await getLastId()
-        let res = await axios.post("https://sale.ismos.isp.sprint.1t.ru/assets/telegramRequest.php", {
+        let res = await axios.post("https://jil-mos.isp.sprint.1t.ru/assets/telegramRequest.php", {
             Project: 'Жилищник',
             title: 'Заявка на услугу!',
             id: count,

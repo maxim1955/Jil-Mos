@@ -9,7 +9,6 @@
         label-color="white"
         color="white"
         :rules="[ (val,rules) => val.length >= 3 || 'Минимальное количество 3 знака!!', (val,rules) => regexpName.test(nameInput) || 'Ввод только кириллица']"
-
     />
     <q-input
         v-model="phoneInput"
@@ -18,19 +17,22 @@
         label="Введите ваш телефон"
         label-color="white"
         color="white"
-        mask="+7(###)###-##-##"/>
-    <div class="flex">
-      <div class="fz-16 Rubik500 text-white">Даю согласие на обработку персональных данных
+        mask="+7(###)###-##-##"
+    />
+    <div class="flex no-wrap items-center">
+      <div class="fz-16 Rubik500 text-white">Даю согласие на обработку персональных данных</div>
+      <div class="">
         <label class="container">
           <input type="checkbox" v-model="checkBoxInput">
           <span class="checkmark"></span>
-        </label>
-      </div>
+        </label></div>
     </div>
 
-    <q-btn class="q-pt-sm q-px-md form_send_btn fz-16 Rubik500" @click="sendFormToCall"
-           :disable="nameInput.length<3 || phoneInput.length<16|| !checkBoxInput">
+    <q-btn class="q-pt-sm q-px-md form_send_btn fz-16 Rubik500" @click="sendFormToCall">
       ОТПРАВИТЬ
+      <q-tooltip>
+        Для отправки заполните все поля
+      </q-tooltip>
     </q-btn>
   </div>
 </template>
@@ -52,7 +54,7 @@ const checkBoxInput = ref(true)
 let count
 let lastId
 const getLastId = async () => {
-  let next_id = await axios.get('https://sale.ismos.isp.sprint.1t.ru/assets/getInfo.php')
+  let next_id = await axios.get('https://jil-mos.isp.sprint.1t.ru/assets/getInfo.php')
   let id = await next_id.data
   lastId = await id.split('}')
   count = lastId.length - 1
@@ -62,30 +64,38 @@ const getLastId = async () => {
 const emit = defineEmits(['closeModal'])
 const sendFormToCall = async () => {
   try {
-    $q.loading.show({
-      message: 'Ваша заявка <b>process</b> в процессе <br/><span class="text-amber text-italic">Пожалуйста подождите....</span>',
-      html: true
-    })
-    await getLastId()
-    let res = await axios.post("https://sale.ismos.isp.sprint.1t.ru/assets/telegramRequest.php", {
-      Project: 'Жилищник',
-      title: 'Заявка на услугу!',
-      id: count,
-      name: nameInput.value,
-      phone: phoneInput.value
-    })
-    if (res.status === 200) {
-      emit('closeModal', false)
-      document.cookie = "Call=true ; path=/index.html ; max-age=86400"
-      console.log('OK')
-      $q.loading.hide()
-      nameInput.value = ''
-      phoneInput.value = ''
+    if (phoneInput.value.length < 16 || nameInput.value.length <= 3 || checkBoxInput.value === false) {
+      $q.notify({
+        message: 'Не все поля заполнены',
+        icon: 'warning',
+        color: 'red'
+      })
     } else {
-      console.log('Error')
-      alert('ERROR')
+      $q.loading.show({
+        message: 'Ваша заявка <b>process</b> в процессе <br/><span class="text-amber text-italic">Пожалуйста подождите....</span>',
+        html: true
+      })
+      await getLastId()
+      let res = await axios.post("https://jil-mos.isp.sprint.1t.ru/assets/telegramRequest.php", {
+        Project: 'Жилищник',
+        title: 'Заявка на услугу!',
+        id: count,
+        name: nameInput.value,
+        phone: phoneInput.value
+      })
+      if (res.status === 200) {
+        emit('closeModal', false)
+        document.cookie = "Call=true ; path=/index.html ; max-age=86400"
+        console.log('OK')
+        $q.loading.hide()
+        nameInput.value = ''
+        phoneInput.value = ''
+      } else {
+        console.log('Error')
+        alert('ERROR')
+      }
+      emit('reCallback', false)
     }
-    emit('reCallback', false)
   } catch (e) {
     console.log(e)
   }
@@ -96,13 +106,9 @@ const sendFormToCall = async () => {
 <style scoped>
 /* The container */
 .container {
-  display: block;
-  position: relative;
-  padding-left: 35px;
   margin-bottom: 12px;
   cursor: pointer;
   font-size: 22px;
-  -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
@@ -110,7 +116,6 @@ const sendFormToCall = async () => {
 
 /* Hide the browser's default checkbox */
 .container input {
-  position: absolute;
   opacity: 0;
   cursor: pointer;
   height: 0;
@@ -120,12 +125,9 @@ const sendFormToCall = async () => {
 /* Create a custom checkbox */
 .checkmark {
   position: relative;
-  left: 10%;
-  bottom: 24px;
   display: block;
   height: 25px;
   width: 25px;
-  background-color: #eee;
   border-radius: 50%;
 }
 
@@ -142,8 +144,6 @@ const sendFormToCall = async () => {
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
   content: "";
-  position: absolute;
-  display: none;
 }
 
 .unCheckmark:after {
@@ -168,6 +168,8 @@ const sendFormToCall = async () => {
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+  position: relative;
+  display: none;
 }
 
 .container .unCheckmark:after {

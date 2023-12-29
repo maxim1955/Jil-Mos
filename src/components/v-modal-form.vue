@@ -36,9 +36,11 @@
           </label>
         </div>
       </div>
-      <q-btn class="q-pt-sm q-px-md form_send_btn fz-16 Rubik500 cursor" v-close-popup @click="sendFormToCall"
-             :disable="phoneInput.length < 16 || nameInput.length <= 3 || checkBoxInput === false">
+      <q-btn class="q-pt-sm q-px-md form_send_btn fz-16 Rubik500 cursor"  @click="sendFormToCall">
         ОТПРАВИТЬ
+        <q-tooltip>
+          Для отправки заполните все поля
+        </q-tooltip>
       </q-btn>
     </div>
   </q-dialog>
@@ -67,7 +69,7 @@ const props = defineProps({
 let count
 let lastId
 const getLastId = async () => {
-  let next_id = await axios.get('https://sale.ismos.isp.sprint.1t.ru/assets/getInfo.php')
+  let next_id = await axios.get('https://jil-mos.isp.sprint.1t.ru/assets/getInfo.php')
   let id = await next_id.data
   lastId = await id.split('}')
   count = lastId.length - 1
@@ -77,35 +79,43 @@ const getLastId = async () => {
 const emit = defineEmits(['closeModal'])
 const sendFormToCall = async () => {
   try {
-    $q.loading.show({
-      message: 'Ваша заявка <b>process</b> в процессе <br/><span class="text-amber text-italic">Пожалуйста подождите....</span>',
-      html: true
-    })
-    await getLastId()
-    let res = await axios.post("https://sale.ismos.isp.sprint.1t.ru/assets/telegramRequest.php", {
-      Project: 'Жилищник',
-      title: 'Заявка на услугу!',
-      id: count,
-      name: nameInput.value,
-      phone: phoneInput.value
-    })
-    if (res.status === 200) {
-      emit('closeModal', false)
-      document.cookie = "Call=true ; path=/index.html ; max-age=86400"
-      console.log('OK')
-      $q.loading.hide()
-      nameInput.value = ''
-      phoneInput.value = ''
+    if (phoneInput.value.length < 16 || nameInput.value.length <= 3 || checkBoxInput.value === false) {
+      $q.notify({
+        message: 'Не все поля заполнены',
+        icon: 'warning',
+        color: 'red'
+      })
     } else {
-      console.log('Error')
-      alert('ERROR')
+      $q.loading.show({
+        message: 'Ваша заявка <b>process</b> в процессе <br/>' +
+            '<span class="text-amber text-italic">Пожалуйста подождите....</span>',
+        html: true
+      })
+      await getLastId()
+      let res = await axios.post("https://jil-mos.isp.sprint.1t.ru/assets/telegramRequest.php", {
+        Project: 'Жилищник',
+        title: 'Заявка на услугу!',
+        id: count,
+        name: nameInput.value,
+        phone: phoneInput.value
+      })
+      if (res.status === 200) {
+        emit('closeModal', false)
+        document.cookie = "Call=true ; path=/index.html ; max-age=86400"
+        console.log('OK')
+        $q.loading.hide()
+        nameInput.value = ''
+        phoneInput.value = ''
+      } else {
+        console.log('Error')
+        alert('ERROR')
+      }
+      emit('reCallback', false)
     }
-    emit('reCallback', false)
   } catch (e) {
     console.log(e)
   }
 }
-
 </script>
 <style scoped>
 /* The container */
